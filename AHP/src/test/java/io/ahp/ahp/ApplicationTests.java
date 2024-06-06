@@ -30,7 +30,9 @@ class ApplicationTests {
 
     @Test
     void firstAnalyticalHierarchicalProcess() {
-        largeur = 7; longueur = 3; profondeur = 4;
+        largeur = 7;
+        longueur = 3;
+        profondeur = 4;
 
         // weights = {2.419620658, 0.8288522034, 0.5849533987, 0.3054826721};
         double[] weights = {2.419620658, 0.8288522034, 0.5849533987, 0.3054826721};
@@ -39,33 +41,27 @@ class ApplicationTests {
                         {100, 1, 1, 1}, // Matinée
                         {60, 0, 0, 1}, // Après-midi
                         {70, 1, 1, 0}  // Soir
-                },
-                { // Mardi
+                }, { // Mardi
                         {70, 0, 0, 0}, // Matinée
                         {50, 1, 0, 1}, // Après-midi
                         {40, 1, 1, 0}  // Soir
-                },
-                { // Mercredi
+                }, { // Mercredi
                         {40, 0, 1, 1}, // Matinée
                         {60, 1, 1, 1}, // Après-midi
                         {90, 0, 1, 0}  // Soir
-                },
-                { // Jeudi
+                }, { // Jeudi
                         {40, 0, 1, 1}, // Matinée
                         {100, 1, 0, 1}, // Après-midi
                         {50, 1, 0, 0}  // Soir
-                },
-                { // Vendredi
+                }, { // Vendredi
                         {50, 1, 1, 0}, // Matinée
                         {30, 0, 0, 1}, // Après-midi
                         {40, 0, 1, 1}  // Soir
-                },
-                { // Samedi
+                }, { // Samedi
                         {50, 0, 1, 1}, // Matinée
                         {20, 1, 1, 1}, // Après-midi
                         {70, 1, 0, 0}  // Soir
-                },
-                { // Dimanche
+                }, { // Dimanche
                         {90, 1, 1, 1}, // Matinée
                         {60, 1, 0, 0}, // Après-midi
                         {50, 1, 0, 0}  // Soir
