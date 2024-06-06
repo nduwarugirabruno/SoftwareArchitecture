@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface TimeSlotRepository extends JpaRepository<TimeSlot, UUID> {
 
-    @Query("select c from time_slot c where string(c.dayOfWeek) like %?1%")
+    @Query("select c from time_slot c where string(c.dayOfWeek) = ?1")
     List<TimeSlot> findByName(String name);
 
 }

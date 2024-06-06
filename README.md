@@ -1,19 +1,21 @@
-# COFODY
+# Software Architecture - AHP Project
 
 ### WE TAKE THE NEXT STEP TOGETHER
 
-[![COFODY](.assets/images/cofody-removebg-preview.png)](https://github.com/nduwarugirabruno/COFODY)
+[![SoftwareArchitecture](.assets/images/ahp-bg-removebg-preview.png)](https://github.com/nduwarugirabruno/SoftwareArchitecture)
 
-COFODY est une application de gestion des caisses d’une tontine. Cette application vise à faciliter la création, la gestion et le suivi des caisses au sein de la COFODY.
+Le processus d'analyse hiérarchique [AHP](https://fr.wikipedia.org/wiki/Proc%C3%A9dure_hi%C3%A9rarchique_d%27analyse)
+est une technique structurée pour organiser et analyser des décisions complexes, basée sur les mathématiques et la
+psychologie. Elle a été développée par Thomas L. Saaty dans les années 1970, largement étudiée et affinée depuis.
 
-It can be previewed on my [GitHub](https://github.com/nduwarugirabruno/COFODY) repository.
+It can be previewed on my [GitHub](https://github.com/nduwarugirabruno/SoftwareArchitecture) repository.
 
 ## Getting Started
 
 To start building, clone this repository:
 
 ```bash
-git clone https://github.com/nduwarugirabruno/COFODY.git
+git clone https://github.com/nduwarugirabruno/SoftwareArchitecture.git
 ```
 
 Once cloned, run the following to install dependencies and run the app:
@@ -29,30 +31,49 @@ idea ./
 We have 4 sub folders and the readme file:
 
 ```bash
-links@links:~/IdeaProjects/COFODY$ ls
-    CAISSE  EurekaServer  README.md  REUNION  USER
+links@links:~/IdeaProjects/SoftwareArchitecture$ ls
+    AHP  TP  README.md
 ```
 
-- The first folder [AHP](AHP) is the Caisse Service developed in Spring Boot x Spring Cloud framework.
-- The first folder [TP](TP) is the Caisse Service developed in Spring Boot x Spring Cloud framework.
+- The first folder [AHP](AHP) is the AHP Service for Scheduling Time table developed in Spring Boot x Spring Cloud framework.
+- The first folder [TP](TP) is the AHP-TP Service for Propose the best road developed in Spring Boot x Spring Cloud framework.
 
 ## Execution
 
-To execute the project, run:
+To execute the AHP project, run:
 
 ```bash
-links@links:~/IdeaProjects/COFODY$ mvn spring-boot:run
+links@links:~/IdeaProjects/SoftwareArchitecture$ cd AHP
+links@links:~/IdeaProjects/SoftwareArchitecture/AHP$ mvn spring-boot:run
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] ------------------------< io.nokash.app:COFODY >------------------------
-[INFO] Building COFODY 0.0.1-SNAPSHOT
+[INFO] ---------------------------< io.ahp.ahp:AHP >---------------------------
+[INFO] Building AHP 0.0.1-SNAPSHOT
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] >>> spring-boot-maven-plugin:3.2.3:run (default-cli) > test-compile @ COFODY >>>
-     .
-     .
-     .
-2024-03-07T13:28:24.502+01:00  INFO 55957 --- [  restartedMain] io.nokash.app.cofody.CofodyApplication   : Started CofodyApplication in 18.329 seconds (process running for 21.339)
+[INFO] >>> spring-boot-maven-plugin:3.2.3:run (default-cli) > test-compile @ AHP >>>
+    .
+    .
+    .
+2024-06-06T18:18:27.200+01:00  INFO 11321 --- [ahp-service] [  restartedMain] io.ahp.ahp.Application                   : Started Application in 18.399 seconds (process running for 19.847)
+```
+
+To execute the TP project, run:
+
+```bash
+links@links:~/IdeaProjects/SoftwareArchitecture$ cd TP
+links@links:~/IdeaProjects/SoftwareArchitecture/TP$ mvn spring-boot:run
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< io.ahp.tp:AHP-TP >--------------------------
+[INFO] Building AHP-TP 0.0.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot-maven-plugin:3.2.3:run (default-cli) > test-compile @ AHP-TP >>>
+    .
+    .
+    .
+2024-06-06T18:18:27.200+01:00  INFO 11321 --- [ahp-tp-service] [  restartedMain] io.ahp.tp.TPApplication                   : Started TPApplication in 18.399 seconds (process running for 19.847)
 ```
 
 ## Production
@@ -60,11 +81,11 @@ links@links:~/IdeaProjects/COFODY$ mvn spring-boot:run
 To build for production, run:
 
 ```bash
-links@links:~/IdeaProjects/COFODY$ mvn clean package
+links@links:~/IdeaProjects/SoftwareArchitecture$ cd AHP && mvn clean package && cd ../TP && mvn clean package
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] ------------------------< io.nokash.app:COFODY >------------------------
-[INFO] Building COFODY 0.0.1-SNAPSHOT
+[INFO] ------------------------< io.nokash.app:SoftwareArchitecture >------------------------
+[INFO] Building SoftwareArchitecture 0.0.1-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
      .
@@ -82,11 +103,11 @@ links@links:~/IdeaProjects/COFODY$ mvn clean package
 To run the unit tests once, run:
 
 ```bash
-links@links:~/IdeaProjects/COFODY$ mvn clean test
+links@links:~/IdeaProjects/SoftwareArchitecture$ mvn clean test
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] ------------------------< io.nokash.app:COFODY >------------------------
-[INFO] Building COFODY 0.0.1-SNAPSHOT
+[INFO] ------------------------< io.nokash.app:SoftwareArchitecture >------------------------
+[INFO] Building SoftwareArchitecture 0.0.1-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
      .
