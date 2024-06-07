@@ -6,7 +6,7 @@
 
 Le processus d'analyse hiérarchique [AHP](https://fr.wikipedia.org/wiki/Proc%C3%A9dure_hi%C3%A9rarchique_d%27analyse)
 est une technique structurée pour organiser et analyser des décisions complexes, basée sur les mathématiques et la
-psychologie. Elle a été développée par Thomas L. Saaty dans les années 1970, largement étudiée et affinée depuis.
+psychologie. Elle a été développée par `Thomas L. Saaty` dans les années `1970`, largement étudiée et affinée depuis.
 
 It can be previewed on my [GitHub](https://github.com/nduwarugirabruno/SoftwareArchitecture) repository.
 
@@ -31,20 +31,26 @@ idea ./
 We have 4 sub folders and the readme file:
 
 ```bash
-links@links:~/IdeaProjects/SoftwareArchitecture$ ls
-    AHP  TP  README.md
+ls
+```
+Output
+```
+    AHP  README.md  TP
 ```
 
 - The first folder [AHP](AHP) is the AHP Service for Scheduling Time table developed in Spring Boot x Spring Cloud framework.
-- The first folder [TP](TP) is the AHP-TP Service for Propose the best road developed in Spring Boot x Spring Cloud framework.
+- The second folder [TP](TP) is the AHP-TP Service for Propose the best road developed in Spring Boot x Spring Cloud framework.
+- The [README.md](README.md) is this file.
 
 ## Execution
 
-To execute the AHP project, run:
+#### To execute the AHP project, run:
 
 ```bash
-links@links:~/IdeaProjects/SoftwareArchitecture$ cd AHP
-links@links:~/IdeaProjects/SoftwareArchitecture/AHP$ mvn spring-boot:run
+cd AHP && mvn spring-boot:run
+```
+- Output
+```
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ---------------------------< io.ahp.ahp:AHP >---------------------------
@@ -58,11 +64,13 @@ links@links:~/IdeaProjects/SoftwareArchitecture/AHP$ mvn spring-boot:run
 2024-06-06T18:18:27.200+01:00  INFO 11321 --- [ahp-service] [  restartedMain] io.ahp.ahp.Application                   : Started Application in 18.399 seconds (process running for 19.847)
 ```
 
-To execute the TP project, run:
+#### To execute the TP project, run:
 
 ```bash
-links@links:~/IdeaProjects/SoftwareArchitecture$ cd TP
-links@links:~/IdeaProjects/SoftwareArchitecture/TP$ mvn spring-boot:run
+cd TP && mvn spring-boot:run
+```
+- Output
+```
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] --------------------------< io.ahp.tp:AHP-TP >--------------------------
@@ -78,10 +86,13 @@ links@links:~/IdeaProjects/SoftwareArchitecture/TP$ mvn spring-boot:run
 
 ## Production
 
-To build for production, run:
+#### To build for production, run:
 
 ```bash
-links@links:~/IdeaProjects/SoftwareArchitecture$ cd AHP && mvn clean package && cd ../TP && mvn clean package
+cd AHP && mvn clean package && cd ../TP && mvn clean package
+```
+- Output
+```
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------------< io.nokash.app:SoftwareArchitecture >------------------------
@@ -100,10 +111,13 @@ links@links:~/IdeaProjects/SoftwareArchitecture$ cd AHP && mvn clean package && 
 
 ## Unit Tests
 
-To run the unit tests once, run:
+#### To run the unit tests once, run:
 
 ```bash
-links@links:~/IdeaProjects/SoftwareArchitecture$ mvn clean test
+mvn clean test
+```
+- Output
+```
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] ------------------------< io.nokash.app:SoftwareArchitecture >------------------------
