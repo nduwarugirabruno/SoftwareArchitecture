@@ -1,92 +1,85 @@
 package io.ahp.tp;
 
-import io.ahp.tp.entity.Node;
+import io.ahp.tp.entity.Path;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
-import static io.ahp.tp.utils.AStarPathfinder.findPath;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static io.ahp.tp.utils.AHP.*;
 
-@SpringBootTest
+@SpringBootTest(classes = TPApplicationTests.class)
 class TPApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
-	@Test
-	void testAStarPathfinding() {
-		// Define the grid
-		int[][] grid = {
-				{0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0},
-				{0, 0, 0, 0, 0}
-		};
+    @Test
+    void ahp() {
+        double[][] criteriaMatrix = {
+                {1, 3, 5, 7},
+                {1.0 / 3, 1, 3, 5},
+                {1.0 / 5, 1.0 / 3, 1, 3},
+                {1.0 / 7, 1.0 / 5, 1.0 / 3, 1}
+        };
 
-		// Define the start and goal nodes
-		Node start = new Node(0, 0);
-		Node goal = new Node(4, 4);
+        double[][] normalizedMatrix = normalizeMatrix(criteriaMatrix);
+        double[] weights = calculateWeights(normalizedMatrix);
+        double consistencyRatio = calculateConsistencyRatio(criteriaMatrix, weights);
 
-		// Find the path
-		List<Node> path = findPath(start, goal, grid);
+        System.out.println("Normalized Matrix:");
+        for (double[] row : normalizedMatrix) {
+            for (double value : row) {
+                System.out.printf("|\t%.4f\t", value);
+            }
+            System.out.println("|");
+        }
 
-		// Verify the path
-		assertNotNull(path);
-		assertEquals(9, path.size()); // The path should have 5 nodes (start, 3 intermediate, goal)
-		assertEquals(start, path.get(0));
-		assertEquals(goal, path.get(path.size() - 1));
-	}
+        System.out.println("\nWeights:");
+        for (double weight : weights) {
+            System.out.printf("|\t%.4f\t", weight);
+        }
+        System.out.println("|");
 
-	@Test
-	void testAStarPathfindingWithObstacles() {
-		// Define the grid with obstacles
-		int[][] grid = {
-				{0, 0, 0, 0, 0},
-				{0, 0, 1, 0, 0},
-				{0, 0, 0, 0, 0},
-				{0, 1, 0, 0, 0},
-				{0, 0, 0, 0, 0}
-		};
+        System.out.println("\n\nConsistency Ratio: " + consistencyRatio);
+        if (consistencyRatio < 0.1) {
+            System.out.println("The consistency ratio is acceptable.");
+        } else {
+            System.out.println("The consistency ratio is not acceptable.");
+        }
+    }
 
-		// Define the start and goal nodes
-		Node start = new Node(0, 0);
-		Node goal = new Node(4, 4);
+    @Test
+    void ahpSort() {
 
-		// Find the path
-		List<Node> path = findPath(start, goal, grid);
+        double[][] criteriaMatrix = {
+                {1, 3, 5, 7},
+                {1.0 / 3, 1, 3, 5},
+                {1.0 / 5, 1.0 / 3, 1, 3},
+                {1.0 / 7, 1.0 / 5, 1.0 / 3, 1}
+        };
 
-		// Verify the path
-		assertNotNull(path);
-		assertEquals(9, path.size()); // The path should have 9 nodes (start, 7 intermediate, goal)
-		assertEquals(start, path.get(0));
-		assertEquals(goal, path.get(path.size() - 1));
-	}
+        List<Path> criteriaValues = new ArrayList<>();
+        criteriaValues.add(new Path("dla-yde", 210.4, 189.7, 0.3049, 1.0214));
+        criteriaValues.add(new Path("dla-ebl", 165.3, 94.8, 0.4646, 1.0214));
+        criteriaValues.add(new Path("nga-dsc", 225.4, 189.7, 0.392, 0.5107));
 
-	@Test
-	void testAStarPathfindingWithNoPath() {
-		// Define the grid with no path
-		int[][] grid = {
-				{0, 0, 0, 0, 0},
-				{0, 0, 1, 0, 0},
-				{0, 1, 1, 1, 0},
-				{0, 0, 1, 0, 0},
-				{0, 0, 0, 0, 0}
-		};
+        double[][] normalizedMatrix = normalizeMatrix(criteriaMatrix);
+        double[] weights = calculateWeights(normalizedMatrix);
+        double consistencyRatio = calculateConsistencyRatio(criteriaMatrix, weights);
+        System.out.println("normalized matrix -> " + Arrays.deepToString(normalizedMatrix) + ", consistency ratio -> " + consistencyRatio + ", weights -> " + Arrays.toString(weights));
 
-		// Define the start and goal nodes
-		Node start = new Node(0, 0);
-		Node goal = new Node(4, 4);
+        List<Path> values = new ArrayList<>();
+        if (consistencyRatio < 0.1)
+            criteriaValues.forEach(criteriaValue -> values.add(new Path(criteriaValue.getPath(), criteriaValue.getDistance() * weights[0], criteriaValue.getTraffic() * weights[1], criteriaValue.getDuration() * weights[2], criteriaValue.getRoadCondition() * weights[3])));
 
-		// Find the path
-		List<Node> path = findPath(start, goal, grid);
+        values.sort(Comparator.comparingDouble(path -> path.getDistance() + path.getDuration() + path.getTraffic() + path.getRoadCondition()));
+        System.out.println(values);
+    }
 
-		// Verify the path
-		assertNotNull(path);
-		assertEquals(9, path.size()); // The path should be empty, as no path is found
-	}
+
 }

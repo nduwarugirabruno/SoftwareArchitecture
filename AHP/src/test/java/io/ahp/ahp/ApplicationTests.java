@@ -11,8 +11,6 @@ import java.util.Arrays;
 @SpringBootTest
 class ApplicationTests {
 
-    private int largeur, longueur, profondeur;
-
     private final Goal MY_GOAL = new Goal("BEST TIME TABLE EVER");
     private final ArrayList<Criterion> criteria = new ArrayList<>(
             Arrays.asList(
@@ -30,9 +28,7 @@ class ApplicationTests {
 
     @Test
     void firstAnalyticalHierarchicalProcess() {
-        largeur = 7;
-        longueur = 3;
-        profondeur = 4;
+        int largeur = 7, longueur = 3, profondeur = 4;
 
         // weights = {2.419620658, 0.8288522034, 0.5849533987, 0.3054826721};
         double[] weights = {2.419620658, 0.8288522034, 0.5849533987, 0.3054826721};
@@ -68,27 +64,7 @@ class ApplicationTests {
                 }
         };
 
-        for (double[][] criteriaValue : criteriaValues)
-            for (double[] criteria : criteriaValue) System.out.println(Arrays.toString(criteria));
-
-        for (int i = 0; i < criteriaValues.length; i++) {
-            System.out.println("Slice " + i + ":");
-            for (int j = 0; j < criteriaValues[i].length; j++) {
-                System.out.print("  Row " + j + ": [");
-                for (int k = 0; k < criteriaValues[i][j].length; k++) {
-                    System.out.printf("%.1f", criteriaValues[i][j][k]);
-                    if (k < criteriaValues[i][j].length - 1) {
-                        System.out.print(", ");
-                    }
-                }
-                System.out.println("]");
-            }
-            System.out.println();
-        }
-        System.out.println("Lundi, la matinée : " + criteriaValues[0][0][0] + ", l'aprèm : " + criteriaValues[0][1][0] + ", le soir : " + criteriaValues[0][2][0]);
-        // Calcul des scores et détermination des meilleurs créneaux horaires
         double[][][] scores = new double[largeur][longueur][profondeur];
-
         // Calcul des scores
         for (int day = 0; day < criteriaValues.length; day++) {
             for (int period = 0; period < criteriaValues[day].length; period++) {
