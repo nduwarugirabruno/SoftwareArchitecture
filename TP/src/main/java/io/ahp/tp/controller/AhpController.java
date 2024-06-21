@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ahp.tp.entity.Path;
 import io.ahp.tp.service.AhpService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,33 +38,26 @@ public class AhpController {
     @PostMapping("/get-synthesis")
     public ResponseEntity<List<Path>> getSynthesis(@RequestParam String criteriaMatrix, @RequestBody List<Path> criteriaValues) {
 
-//        String[] rows = criteriaMatrix.replaceAll("\\[|\\]", "").split("\\],\\[");
-//        double[][] matrix = new double[rows.length][rows[0].split(",").length];
-//
-//        for (int i = 0; i < rows.length; i++) {
-//            String[] values = rows[i].split(",");
-//            for (int j = 0; j < values.length; j++) {
-//                matrix[i][j] = Double.parseDouble(values[j]);
-//            }
-//        }
-
         try {
-            List<double[]> cars1 = objectMapper.readValue(criteriaMatrix, List.class);
-            System.out.println("car: " + Arrays.toString(cars1.toArray()));
+            List<double[]> list = objectMapper.readValue(criteriaMatrix, List.class);
+            System.out.println("mat -> " + list + "\nlist 0 -> " + Arrays.toString(list.toArray(new double[4][4])[0]));
+            System.out.println("00 -> ");
+            int rows = list.size();
+            System.out.println("01 -> rows " + rows);
+            int cols = list.get(1).length;
+            System.out.println("02 -> cols " + cols);
+            double[][] matrix = new double[rows][cols];
+
+            for (int i = 0; i < rows; i++) {
+                matrix[i] = list.get(i);
+            }
+
+            System.out.println("matrix -> " + Arrays.deepToString(matrix));
+            return ahpService.getSynthesis(criteriaValues, matrix);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error Cause -> " + e.getCause());
+            System.out.println("Error Message -> " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // renvoie un code de statut 500
         }
-
-//        try {
-//            objectMapper.convertValue(criteriaMatrix, new TypeReference<>() {});
-//        } catch (IllegalArgumentException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            matrix = objectMapper.convertValue(criteriaMatrix, new TypeReference<>() {});
-//        }
-
-        double[][] matrix = new double[0][];
-
-        return ahpService.getSynthesis(criteriaValues, matrix);
     }
 }

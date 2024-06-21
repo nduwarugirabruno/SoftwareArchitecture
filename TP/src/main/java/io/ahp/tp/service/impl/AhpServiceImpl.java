@@ -50,8 +50,7 @@ public class AhpServiceImpl implements AhpService {
     @Override
     public ResponseEntity<List<Path>> getSynthesis(List<Path> criteriaValues, double[][] criteriaMatrix) {
         try {
-            System.out.println(Arrays.deepToString(criteriaMatrix));
-            System.out.println(criteriaValues);
+            System.out.println("criteriaMatrix -> " + Arrays.deepToString(criteriaMatrix));
 
             double[][] normalizedMatrix = normalizeMatrix(criteriaMatrix);
             double[] weights = calculateWeights(normalizedMatrix);
